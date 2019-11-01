@@ -1,0 +1,9 @@
+10:25:27.269 -> Starting WPS
+10:25:27.269 -> Station Mode Started
+10:25:27.269 -> WPS_PIN = 22163059
+10:26:13.817 -> Disconnected from station, attempting reconnection
+10:26:14.788 -> WPS Successfull, stopping WPS and connecting to: aterm-58ebe5-g
+10:26:14.855 -> Disconnected from station, attempting reconnection
+10:26:19.403 -> Connected to :aterm-58ebe5-g
+10:26:19.403 -> Got IP: 192.168.10.108
+
