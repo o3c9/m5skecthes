@@ -32,6 +32,7 @@ bool isLeapYear(int year)
 void setup()
 {
     M5.begin();
+    delay(100);
 }
 
 void loop()
