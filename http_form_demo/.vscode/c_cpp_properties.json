@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "<<arduino.path>>/hardware/arduino/avr/cores/arduino",
+                "<<arduino.path>>/hardware/arduino/avr/variants/standard",
+                "<<arduino.path>>/hardware/tools/avr/avr/include",
+                "<<arduino.path>>/hardware/tools/avr/lib/gcc/avr/4.9.2/include",
+                "${env:HOME}/Documents/Arduino/libraries/MCP23017/src",
+                "${env:HOME}/Documents/Arduino/libraries/M5Stack/src",
+                "${env:HOME}/Documents/Arduino/libraries/sdfonts",
+                "${env:HOME}/Documents/Arduino/hardware/espressif/esp32/**",
+                "${env:HOME}/Library/Arduino15/packages/esp8266/tools/**",
+                "${env:HOME}/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/**"
+            ],
+            "forcedInclude": [],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "defines": ["ESP32"],
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
