@@ -1,21 +1,36 @@
-ARDUINO := /Applications/Arduino.app/Contents/MacOS/Arduino
-BUILD_DIR := ../build/$(shell basename "$$PWD")
+ARDUINO := arduino-cli
 BOARD := espressif:esp32:m5stack-core-esp32
 PORT := /dev/cu.SLAB_USBtoUART
 TTY := /dev/tty.SLAB_USBtoUART
 BAUD := 115200
-SKETCH = $(shell basename "$$PWD").ino
+PROJECT := $(shell basename "$$PWD")
+BUILD_DIR := ../build/$(PROJECT)
+BUILD_PATH = $(realpath $(BUILD_DIR))
+BOARD_IN_PATH := $(subst :,.,$(BOARD))
+PROJECT_DIR := $(abspath .)
+
+.PHONY: prepare
+prepare:
+	mkdir -p $(abspath $(BUILD_DIR))
+
+.PHONY: compile
+compile: prepare
+	$(ARDUINO) compile -b $(BOARD) \
+		--build-path $(BUILD_PATH) \
+		--build-cache-path $(BUILD_PATH) \
+		$(PROJECT_DIR)
 
 .PHONY: upload
 upload:
-	$(ARDUINO) --pref build.path=$(BUILD_DIR) --board $(BOARD) --port $(PORT) --upload $(SKETCH)
+	cp $(BUILD_PATH)/$(PROJECT).ino.partitions.bin $(PROJECT_DIR)/$(PROJECT).$(BOARD_IN_PATH).partitions.bin
+	$(ARDUINO) upload -b $(BOARD) -p $(PORT) -t $(PROJECT_DIR)
 
-.PHONY: verify
-verify:
-	$(ARDUINO) --pref build.path=$(BUILD_DIR) --board $(BOARD) --port $(PORT) --verify $(SKETCH)
+.PHONY: clean
+clean:
+	rm -f $(PROJECT_DIR)/*.bin
+	rm -f $(PROJECT_DIR)/*.elf
 
-.PHONE: serial
-serial:
-	screen $(TTY) $(BAUD)
+.PHONY: all
+all: compile upload clean
 
-.DEFAULT_GOAL := verify
+.DEFAULT_GOAL := all
